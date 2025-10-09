@@ -77,7 +77,6 @@ public class InfoWebFragment extends Fragment {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
 
-        // Always load default site unless restored from rotation
         if (savedInstanceState == null) {
             webView.loadUrl("https://seekingalpha.com");
         }
