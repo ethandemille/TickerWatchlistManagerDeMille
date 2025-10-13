@@ -18,6 +18,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
 
+    TickerListFragment tickerListFragment = new TickerListFragment();
+    InfoWebFragment infoWebFragment = new InfoWebFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
 
-            TickerListFragment tickerListFragment = new TickerListFragment();
-            InfoWebFragment infoWebFragment = new InfoWebFragment();
+
 
             ft.add(R.id.fragmentContainerView, tickerListFragment, "tickerListFrag");
             ft.add(R.id.fragmentContainerView2, infoWebFragment, "infoWebFrag");
@@ -44,13 +46,18 @@ public class MainActivity extends AppCompatActivity {
     }
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        String tickerPattern = "^Ticker:<<[a-zA-Z]+>>$";
+        String tickerPatternBroad = "^Ticker:<<.+>>$";
         String sms = intent.getStringExtra("sms");
         //Toast.makeText(this,sms, Toast.LENGTH_LONG).show();
-        if(true) { // here you will check that it is valid data
-            Toast.makeText(this, sms, Toast.LENGTH_LONG).show();
-        }
-    else{
-            Toast.makeText(this, "No valid SMS was found",
+        if(sms.matches(tickerPatternBroad) && sms.matches(tickerPattern)) {
+            String ticker = sms.substring(9, sms.indexOf(">>")).toUpperCase();
+            //Toast.makeText(this, ticker, Toast.LENGTH_LONG).show();
+            tickerListFragment.addTicker(ticker);
+        } else if (sms.matches(tickerPatternBroad)) {
+            Toast.makeText(this, "Invalid Ticker Symbol", Toast.LENGTH_LONG).show();
+        } else{
+            Toast.makeText(this, "Invalid Message Format",
                 Toast.LENGTH_LONG).show();
         }
     }
