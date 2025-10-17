@@ -31,7 +31,6 @@ public class InfoWebFragment extends Fragment {
     private WebView webView;
 
     public InfoWebFragment() {
-        // Required empty public constructor
     }
 
     /**
@@ -64,7 +63,6 @@ public class InfoWebFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_info_web, container, false);
     }
 

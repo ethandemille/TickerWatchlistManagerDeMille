@@ -34,7 +34,7 @@ public class TickerListFragment extends Fragment {
     private String mParam2;
 
     public TickerListFragment() {
-        // Required empty public constructor
+
     }
 
     /**
@@ -85,11 +85,9 @@ public class TickerListFragment extends Fragment {
             String ticker = mainList.get(position);
             String url = "https://seekingalpha.com/symbol/" + ticker;
 
-            InfoWebFragment infoWebFragment = (InfoWebFragment) getParentFragmentManager()
-                    .findFragmentById(R.id.fragmentContainerView2);
+            InfoWebFragment infoWebFragment = (InfoWebFragment) getParentFragmentManager().findFragmentById(R.id.fragmentContainerView2);
 
             if (infoWebFragment != null) {
-                //change later?
                 infoWebFragment.loadUrl(url);
             }
         });

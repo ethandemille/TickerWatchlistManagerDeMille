@@ -53,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
         if(sms.matches(tickerPatternBroad) && sms.matches(tickerPattern)) {
             String ticker = sms.substring(9, sms.indexOf(">>")).toUpperCase();
             //Toast.makeText(this, ticker, Toast.LENGTH_LONG).show();
+            String url = "https://seekingalpha.com/symbol/" + ticker;
+            if (infoWebFragment != null) {
+                //change later?
+                infoWebFragment.loadUrl(url);
+            }
             tickerListFragment.addTicker(ticker);
         } else if (sms.matches(tickerPatternBroad)) {
             Toast.makeText(this, "Invalid Ticker Symbol", Toast.LENGTH_LONG).show();
